@@ -7,7 +7,7 @@ import (
 )
 
 // Dictinary 字典
-var Dictinary *map[interface{}]interface{}
+var Dictinary *map[any]any
 
 // LoadLocales 读取国际化文件
 func LoadLocales(path string) error {
@@ -15,7 +15,7 @@ func LoadLocales(path string) error {
 	if err != nil {
 		return err
 	}
-	m := make(map[interface{}]interface{})
+	m := make(map[any]any)
 	err = yaml.Unmarshal([]byte(data), &m)
 	if err != nil {
 		return err
@@ -46,7 +46,7 @@ func T(key string) string {
 		for k, v := range dic {
 			if ks, ok := k.(string); ok {
 				if ks == path {
-					if dic, ok = v.(map[interface{}]interface{}); ok == false {
+					if dic, ok = v.(map[any]any); ok == false {
 						return path
 					}
 				}

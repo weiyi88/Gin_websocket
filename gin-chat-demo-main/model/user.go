@@ -17,8 +17,8 @@ type User struct {
 }
 
 const (
-	PassWordCost        = 12         //密码加密难度
-	Active       string = "active"   //激活用户
+	PassWordCost        = 12       //密码加密难度
+	Active       string = "active" //激活用户
 )
 
 //SetPassword 设置密码

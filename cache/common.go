@@ -47,5 +47,7 @@ func Redis() {
 		logging.Info(err)
 		panic(err)
 	}
+	logging.Info("Redis Connnect Successfully")
+
 	RedisClient = client
 }

@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
+	logging "github.com/sirupsen/logrus"
 	"time"
 )
 
@@ -18,6 +20,8 @@ func Database(connString string) {
 	if err != nil {
 		panic(err)
 	}
+	logging.Info("Mysql Connnect Successfully")
+
 	if gin.Mode() == "release" {
 		db.LogMode(false)
 	}

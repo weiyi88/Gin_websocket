@@ -18,13 +18,13 @@ func (service UserRegisterService) Register() serializer.Response {
 	var user model.User
 	var count int
 	code := e.SUCCESS
-	model.DB.Model(&model.User{}).Where("user_name=?",service.UserName).Count(&count)
+	model.DB.Model(&model.User{}).Where("user_name=?", service.UserName).Count(&count)
 	if count == 1 {
 		code = e.ERROR
 		return serializer.Response{
 			Status: code,
 			Msg:    e.GetMsg(code),
-			Data:"已经存在该用户了",
+			Data:   "已经存在该用户了",
 		}
 	}
 	user = model.User{

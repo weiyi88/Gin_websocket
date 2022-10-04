@@ -9,6 +9,6 @@ import (
 func main() {
 	conf.Init()
 	go service.Manager.Start()
-	r:=router.NewRouter()
+	r := router.NewRouter()
 	_ = r.Run(conf.HttpPort)
 }

@@ -1,5 +1,6 @@
 package e
 
+// 标准码
 const (
 	SUCCESS               = 200
 	UpdatePasswordSuccess = 201
