@@ -31,5 +31,8 @@ func Database(connString string) {
 	db.DB().SetMaxOpenConns(100) //设置打开最大链接
 	db.DB().SetConnMaxLifetime(time.Second * 30)
 	DB = db
+	fmt.Println("herrrr")
 	migration()
+	fmt.Println("herrr324234r")
+
 }
