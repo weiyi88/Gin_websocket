@@ -66,7 +66,7 @@ func (manage *ClientManager) Start() {
 					Code:    e.WebsocketOnlineReply,
 					Content: "对方在线应答中",
 				}
-				msg, _ := json.Marshal(replyMsg)
+				msg, err := json.Marshal(replyMsg)
 				_ = broadcast.Client.Socket.WriteMessage(websocket.TextMessage, msg)
 				// 消息插入到mongodb中
 				err = InsertMsg(conf.MongoDBName, id, string(message), 1, int64(3*month)) // 1代表已读

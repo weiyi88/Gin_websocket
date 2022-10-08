@@ -2,12 +2,14 @@ package service
 
 import (
 	"chat/cache"
+	"chat/conf"
 	"chat/pkg/e"
 	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"net/http"
+	"strconv"
 	"time"
 )
 
@@ -26,7 +28,7 @@ type ReplyMsg struct {
 	Content string `json:"content"`
 }
 
-//用户类
+// 用户类
 type Client struct {
 	ID     string
 	SendId string
@@ -141,8 +143,25 @@ func (c *Client) Read() {
 				Client:  c,
 				Message: []byte(sendMsg.Content),
 			}
+		} else if sendMsg.Type == 2 {
+			// 获取历史消息
+			timeT, err := strconv.Atoi(sendMsg.Content) // string  to int
+			if err != nil {
+				timeT = 9999999
+			}
+			results, _ := FindMany(conf.MongoDBName, c.SendId, c.ID, int64(timeT), 10)
+			if len(results) > 10 {
+				results = results[:10]
+			} else if len(results) == 0 {
+				replyMsg := ReplyMsg{
+					Code:    e.WebsocketEnd,
+					Content: "到底了",
+				}
+				msg, _ := json.Marshal(replyMsg)
+				_ = c.Socket.WriteMessage(websocket.TextMessage, msg)
+				continue
+			}
 		}
-
 	}
 
 }

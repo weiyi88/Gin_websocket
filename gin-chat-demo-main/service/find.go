@@ -30,7 +30,7 @@ func InsertMsg(database string, id string, content string, read uint, expire int
 	return
 }
 
-func FindMany(database string, sendId string, id string, time int64, pageSize int) (results []ws.Result, err error) {
+func Many(database string, sendId string, id string, time int64, pageSize int) (results []ws.Result, err error) {
 	var resultsMe []ws.Trainer
 	var resultsYou []ws.Trainer
 	sendIdCollection := conf.MongoDBClient.Database(database).Collection(sendId)
