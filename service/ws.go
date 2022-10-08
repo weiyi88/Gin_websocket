@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
+	"log"
 	"net/http"
 	"strconv"
 	"time"
@@ -160,6 +161,17 @@ func (c *Client) Read() {
 				msg, _ := json.Marshal(replyMsg)
 				_ = c.Socket.WriteMessage(websocket.TextMessage, msg)
 				continue
+			}
+		} else if sendMsg.Type == 3 {
+			results, err := FIrstFindMsg(conf.MongoDBName, c.SendId, c.ID)
+			if err != nil {
+				log.Println(err)
+			}
+
+			for _, result := range results {
+				replyMsg := ReplyMsg{
+					From: result.
+				}
 			}
 		}
 	}
