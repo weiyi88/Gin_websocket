@@ -99,9 +99,9 @@ func FindFirstMsg(database string, sendId string, id string) (results []ws.Reusl
 	overTimeFileter := bson.D{
 		{
 			"$and", bson.A{
-			bson.D{{"endTime", bson.M{"&lt": time.Now().Unix()}}},
-			bson.D{{"read", bson.M{"$eq": 1}}},
-		}},
+				bson.D{{"endTime", bson.M{"&lt": time.Now().Unix()}}},
+				bson.D{{"read", bson.M{"$eq": 1}}},
+			}},
 	}
 
 	_, _ = sendIdCollection.DeleteMany(context.TODO(), overTimeFileter)
@@ -114,7 +114,7 @@ func FindFirstMsg(database string, sendId string, id string) (results []ws.Reusl
 	})
 
 	_, _ = sendIdCollection.UpdateMany(context.TODO(), filter, bson.M{
-		"$set": bson.M{"endTime": time.Now().Unix() + int64(3*month)}
+		"$set": bson.M{"endTime": time.Now().Unix() + int64(3*month)},
 	})
 	return
 }
