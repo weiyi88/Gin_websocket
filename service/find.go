@@ -56,7 +56,7 @@ func FindMany(database, sendId, id string, time int64, pageSize int) (results []
 	return
 }
 
-func FindFirstMsg(database string, sendId string, id string) (results []ws.Reuslt) {
+func FirsFindtMsg(database string, sendId string, id string) (results []ws.Reuslt, err error) {
 	// 首次查询（把对方发来的所有未读的都取出来
 	var resutleMe []ws.Trainer
 	var resultYou []ws.Trainer
